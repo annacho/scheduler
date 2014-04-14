@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Fave Tasks App</title>
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+</head>
+<body>
+	<div class="jumbotron">
+	<h1>My Task Scheduler</h1>
+	<p>Put yo' tasks in and we'll schedule it!</p>
+
+	<ul>
+		<% @fave_tasks.each do |fave_task| %>
+		<li><%= fave_task %></li>
+		<% end %>
+	</ul>
+
+	<form action="/fave_tasks" method="post">
+		<input type="text" id="notes" name="notes">
+		<!-- <input type day and time> -->
+		<!-- 		<textarea rows="4" cols="50" id="notes" name="notes"></textarea> -->
+		<br>
+		<br>
+		<p><input type="submit" a class="btn btn-primary btn-lg" role="button"></a></p>
+	</form>
+	</div>
+</body>
+</html>

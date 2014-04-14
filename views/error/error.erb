@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Fave Tasks App</title>
+	<link rel="stylesheet" type="text/css" href="/application.css">
+</head>
+<body>
+	<h1>Error</h1>
+	<p>You inputed the phrase, "Be mean to myself." This is a big no-no. You have to believe in yourself! Please input a new task that is good for your self esteem!</p>
+
+	<ul> 
+		<% @fave_tasks.each do |fave_task| %>
+		<li><%= fave_task %></li> <!-- <li>Feed Dog</li> -->
+		<% end %>
+	</ul>
+
+	<form action="/fave_tasks" method="post">
+		<input type="textarea" id="notes" name="notes">
+		<input type="submit">
+	</form>
+</body>
+</html>
