@@ -33,7 +33,7 @@ class FaveTask
 		if fave_task.downcase == "be mean to myself"
 			return false
 		else
-			@@fave_tasks << fave_task
+			@@fave_tasks.push(fave_task)
 		end
 	end
 
