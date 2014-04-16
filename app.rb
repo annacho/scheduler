@@ -1,29 +1,83 @@
 require 'sinatra'
+require 'sinatra/activerecord'
+
+set :database, "sqlite3:///to_do_app.db"
 
 get "/fave_tasks" do
-	@fave_tasks = FaveTask.fave_tasks
-	erb :"fave_tasks/index" # super important to publish!
+	@example_tasks = FaveTask.fave_tasks
+	@fave_tasks = FaveTask.all
+	erb :"fave_tasks/index" 
+end
+
+get "/fave_tasks/new" do
+	@new_fave_task = FaveTask.new
+	erb :"fave_tasks/new"
+end
+
+# post "/fave_tasks" do
+# 	@fave_task = FaveTask.new(params[:fave_task])
+# 	if @fave_task.me
+# 		@fave_task.save
+# 		redirect "/fave_tasks/#{@fave_task.id}"
+# 	else
+# 		redirect "/Error"
+# 	end
+# end
+
+put "/fave_tasks/:id" do
+	@fave_task = FaveTask.find(params[:id])
+	if @fave_task.update_attributes(params[:fave_task])
+		redirect "/fave_tasks/#{@fave_task.id}"
+	else
+		redirect "/Error"
+	end
 end
 
 post "/fave_tasks" do 
-	text = params[:notes]
-	if FaveTask.add_to_fave_tasks(text)
+	new_fave_task = FaveTask.new
+	new_fave_task[:description] = params[:description]
+	new_fave_task[:date] = params[:date]
+	new_fave_task[:time] = params[:time]
+	if new_fave_task.save
 		redirect "/fave_tasks"
 	else
-		redirect "/error"
+		redirect "/Error"
 	end
+end
+
+get "/edit" do
+	@fave_tasks = FaveTask.fave_tasks
+	erb :"fave_tasks/edit"
+end
+
+get "/fave_tasks/:id" do
+	@fave_task = FaveTask.find(params[:id])
+	erb :"fave_tasks/show"
 end
 
 get "/error" do
-	@fave_tasks = FaveTask.fave_tasks
-	erb :"/error/error"
+	redirect "/Error"
 end
 
-class FaveTask
+get "/Error" do
+	@fave_tasks = FaveTask.fave_tasks
+	erb :"fave_tasks/error"
+end
+
+delete '/fave_tasks/:id' do
+	fave_task = FaveTask.find(params[:id])
+	if fave_task.delete
+		redirect '/fave_tasks'
+	else
+		redirect '/fave_tasks/:id'
+	end
+end
+
+class FaveTask < ActiveRecord::Base 
 	@@fave_tasks = ["Example: Do laundry", "Example: Do long workout"]
 
-	def initialize
-	end
+	# def initialize # forgot reason here
+	# end
 
 	def self.fave_tasks
 		@@fave_tasks

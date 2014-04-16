@@ -1,0 +1,6 @@
+<%= @fave_task.description %>
+
+<form action="/fave_tasks/<%= @fave_task.id %>" method="post">
+	<input type="hidden" name="_method" value="delete" /> <!-- _method denotes passing value for method above  -->
+	<input type="submit" value="Delete" />
+</form>

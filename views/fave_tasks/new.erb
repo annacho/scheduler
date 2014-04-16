@@ -1,0 +1,6 @@
+<form action="/fave_tasks" method="post">
+		<input type="text" id="fave_task_description" name="fave_task[description]" value="<%= @new_fave_task.description %>">
+		<input type="text" id="fave_task_date" name="fave_task[date]" value="<%= @new_fave_task.date %>">
+		<input type="text" id="fave_task_time" name="fave_task[time]" value="<%= @new_fave_task.time %>">
+		<input type="submit" value="Add" />
+</form>

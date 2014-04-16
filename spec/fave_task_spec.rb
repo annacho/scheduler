@@ -6,6 +6,15 @@ describe FaveTask do
 		FaveTask.fave_tasks.should_not be_empty
 	end
 
+	it 'should not add invalid favorite tasks' do # validation spec
+		first_count = FaveTask.fave_tasks.count
+		fave_task = "be mean to myself"
+		FaveTask.add_to_fave_tasks(fave_task)
+		second_count = FaveTask.fave_tasks.count
+
+		second_count.should == first_count # eq()
+	end
+
 	it 'should add a favorite task' do
 		first_count = FaveTask.fave_tasks.count # counts before adding a task
 		fave_task = "Brush Teeth" # created after the class method to specify what task 
