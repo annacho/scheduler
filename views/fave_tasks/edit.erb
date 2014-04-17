@@ -1,7 +1,33 @@
-<form action="/fave_tasks/<%= @fave_task.id %>" method="post">
+<html>
+<head>
+	<title>Edit</title>
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+</head>
+<body>
+	<div class="jumbotron">
+	<h1>My Task Scheduler</h1>
+	<p>Put yo' tasks in and we'll schedule it!</p>
+
+	<form action="/fave_tasks/<%= @fave_task.id %>" method="post">
 		<input type="hidden" name="_method" value="put" /> 
-		<input type="text" id="fave_task_description" name="fave_task[description]" value="<%= @new_fave_task.description %>">
-		<input type="text" id="fave_task_date" name="fave_task[date]" value="<%= @new_fave_task.date %>">
-		<input type="text" id="fave_task_time" name="fave_task[time]" value="<%= @new_fave_task.time %>">
-		<input type="submit">
-</form>
+		<input type="text" id="fave_task_description" name="fave_task[description]" class="form-control" value="<%= @fave_task.description %>">
+		<br>
+		<input type="text" id="fave_task_date" name="fave_task[date]" class="form-control" value="<%= @fave_task.date %>">
+		<br>
+		<input type="text" id="fave_task_time" name="fave_task[time]" class="form-control" value="<%= @fave_task.time %>">
+		<br>
+		<br>
+		<p><input type="submit" button type="button" class="btn btn-primary btn-lg btn-block" value="Save Changes"></a></p>
+	</form>
+
+	<form action="/fave_tasks/<%= @fave_task.id %>" method="post">
+		<input type="hidden" name="_method" value="delete" />
+		<input type="submit" button type="button" class="btn btn-primary btn-lg btn-block" value="Delete Task"></a>
+	</form> 
+
+	<a href="/fave_tasks"><button type="button" class="btn btn-primary btn-lg btn-block">Nevermind. Let's not make changes.</button></a>
+
+</div>
+</body>
+</html>
+

@@ -11,8 +11,8 @@
 
 	<ul>
 		<% @fave_tasks.each do |fave_task| %>
-		<li><%= fave_task.description %>&nbsp;<%= fave_task.date %>&nbsp;<%= fave_task.time %></li>
-		<% end %> <!-- would like to create a link here that leads to individual page to edit -->
+		<li><%= fave_task.description %>&nbsp;<%= fave_task.date %>&nbsp;<%= fave_task.time %> - <a href="/<%= fave_task.id %>/edit">Edit</a></li>
+		<% end %>
 	</ul>
 
 	<form action="/fave_tasks" method="post">
@@ -25,7 +25,7 @@
 		<!-- 		<textarea rows="4" cols="50" id="notes" name="notes"></textarea> -->
 		<br>
 		<br>
-		<p><input type="submit" button type="button" class="btn btn-primary btn-lg btn-block">Add Task Now</button></p>
+		<p><input type="submit" button type="button" class="btn btn-primary btn-lg btn-block" value="Add Task Now"></a></p>
 		<!-- <input type="submit" a class="btn btn-primary btn-lg" role="button"></a> -->
 	</form>
 	</div>

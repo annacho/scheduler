@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140415210925) do
+ActiveRecord::Schema.define(version: 20140416215204) do
 
   create_table "fave_tasks", force: true do |t|
     t.string   "description"

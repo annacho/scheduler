@@ -1,7 +1,7 @@
 require 'sinatra'
 require 'sinatra/activerecord'
 
-set :database, "sqlite3:///to_do_app.db"
+set :database, "sqlite3:///fave_tasks.db"
 
 get "/fave_tasks" do
 	@example_tasks = FaveTask.fave_tasks
@@ -24,7 +24,12 @@ end
 # 	end
 # end
 
-put "/fave_tasks/:id" do
+get "/:id" do
+	@fave_task = FaveTask.find(params[:id])
+	erb :"fave_tasks/show"
+end
+
+put "/fave_tasks/:id" do # works to edit or update inputed data
 	@fave_task = FaveTask.find(params[:id])
 	if @fave_task.update_attributes(params[:fave_task])
 		redirect "/fave_tasks/#{@fave_task.id}"
@@ -33,7 +38,7 @@ put "/fave_tasks/:id" do
 	end
 end
 
-post "/fave_tasks" do 
+post "/fave_tasks" do # works to add or delete data
 	new_fave_task = FaveTask.new
 	new_fave_task[:description] = params[:description]
 	new_fave_task[:date] = params[:date]
@@ -53,6 +58,11 @@ end
 get "/fave_tasks/:id" do
 	@fave_task = FaveTask.find(params[:id])
 	erb :"fave_tasks/show"
+end
+
+get "/:id/edit" do
+	@fave_task = FaveTask.find(params[:id])
+	erb :"fave_tasks/edit"
 end
 
 get "/error" do
